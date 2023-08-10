@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoPrice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/main.css">
+
+</head>
+
+<body>
+
+    <header>
+        <div class="navbar pd-30">
+            <div class="logo">
+                <img src="/images/pngwing.com.png" alt="">
+                <span>CryptoPrice</span>
+            </div>
+
+            <p>Know Your FAVOURITE CRYPTO Prices Here</p>
+
+            <form class="inputBox" id="demo" method="post" action="/search">
+                <input type="text" placeholder="Ex: XLM-EUR or BTC-USD" name="search">
+                <button><img src="/images/search.svg" alt=""></button>
+
+            </form>
+        </div>
+    </header>
+
+    <main class="content">
+
+        <% if(locals.dta){ %>
+            <div class="boxes">
+                <p><img src="/images/coin.svg" alt="">
+                    <%= dta.symbol %>
+                </p>
+                <p id="second">Price: <span> $<%= dta.price_24h %></span></p>
+            </div>
+            <% } %>
+                <% if(locals.arr){ %>
+                    <% for(let i=0; i<5; i++){%>
+                        <div class="boxes">
+                            <p><img src="/images/coin.svg" alt="">
+                                <%= arr[i].symbol %>
+                            </p>
+                            <p id="second">Price: <span> $<%= arr[i].price_24h %></span></p>
+                        </div>
+                        <%}%>
+                            <% } %>
+
+                        <% if(locals.error){ %>
+                            <% if(error == "Request failed with status code 500"){%>
+                                <h1 style="color: rgba(0, 0, 0, 0.247); text-align: center; line-height: 2;">
+                                    Sorry, Trading of this Crypto is not Opened yet 
+                                </h1>
+                                <%}else{%>
+                                    <h1 style="color: rgba(0, 0, 0, 0.247); text-align: center; line-height: 2;">
+                                        Cannot Find the Crypto You Are Looking For <br>
+                                        Try Correctly Again!
+                                </h1>
+                                <%}%>
+                        <% }%>
+    </main>
+
+    <footer>
+        💸 Copyright © 2023 💸
+    </footer>
+</body>
+
+</html>
